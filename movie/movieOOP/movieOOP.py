@@ -2,6 +2,7 @@ import requests
 import csv
 import urllib.request
 import os
+import time
 from datetime import date, timedelta
 
 class Movie:
@@ -11,12 +12,13 @@ class Movie:
     KEY_KOBIS = "08305de6d4fe4be99dd4e3293b30dfa2"
     KEY_NAVER = "xL3zdvWuqpSs08aJTPbk"
     PW_NAVER = "CBUZR1B2cH"
-    def __init__(self, weeks=1):
+    def __init__(self, weeks=1, path='.'):
         self.weeks=weeks
+        self.path=path
 
     def boxoffice(self, weekGb=0, key=KEY_KOBIS):
         base_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key={}&targetDt={}&weeekGb={}'
-        boxoffice = csv.writer(open('./csv/boxoffice.csv', 'w', encoding='utf-8', newline=''))
+        boxoffice = csv.writer(open('{}/csv/boxoffice.csv'.format(self.path), 'w', encoding='utf-8', newline=''))
         # boxoffice.writerow(['showRange, 'movieCd', 'movieNm', 'audiAcc'])
 
         for week in range(self.weeks):
@@ -34,8 +36,8 @@ class Movie:
 
     def movie(self, key=KEY_KOBIS):
         base_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key={}&movieCd={}'
-        boxoffice = csv.reader(open("./csv/boxoffice.csv", 'r', encoding="utf-8"))
-        movie_info = csv.writer(open('./csv/movie.csv', 'w', encoding="utf-8", newline=''))
+        boxoffice = csv.reader(open("{}/csv/boxoffice.csv".format(self.path), 'r', encoding="utf-8"))
+        movie_info = csv.writer(open('{}/csv/movie.csv'.format(self.path), 'w', encoding="utf-8", newline=''))
         # movie_info.writerow(['영화코드', '영화명(국문)', '영화명(영문)', '영화명(원문)', '개봉연도', '상영시간', '장르', '감독명', '배우1', '배우2', '배우3', '관람등급'])
 
         for row in boxoffice:
@@ -57,8 +59,8 @@ class Movie:
     def movie_naver(self, key=KEY_NAVER, pw=PW_NAVER):
         base_url = 'https://openapi.naver.com/v1/search/movie.json?query={}&display=1'
         headers = {'X-Naver-Client-Id': key, 'X-Naver-Client-Secret': pw }
-        movie_info = csv.reader(open("./csv/movie.csv", "r", encoding="utf-8"))
-        movie_naver = csv.writer(open("./csv/movie_naver.csv", "w", encoding="utf-8", newline=""))
+        movie_info = csv.reader(open("{}/csv/movie.csv".format(self.path), "r", encoding="utf-8"))
+        movie_naver = csv.writer(open("{}/csv/movie_naver.csv".format(self.path), "w", encoding="utf-8", newline=""))
         # movie_naver.writerow(['movie_name', 'movie_code', 'thumb_url', 'link_url', 'user_rating'])
 
         for row in movie_info:
@@ -67,21 +69,22 @@ class Movie:
             response = requests.get(url, headers=headers).json().get("items")[0]
             result = [movieNm, movieCd] + [response.get(value) for value in ["image", "link", "userRating"]]
             movie_naver.writerow(result)
+            time.sleep(.100) # naver API 호출 빈도 제한
 
         return
 
 
     def image(self):
-        movie_naver = csv.reader(open("./csv/movie_naver.csv", "r", encoding="utf-8"))
+        movie_naver = csv.reader(open("{}/csv/movie_naver.csv".format(self.path), "r", encoding="utf-8"))
         for row in movie_naver:
             movieCd, thumb_url = row[1], row[2]
-            urllib.request.urlretrieve(thumb_url, "./images/{}.jpg".format(movieCd))
+            urllib.request.urlretrieve(thumb_url, "{}/images/{}.jpg".format(self.path, movieCd))
 
         return
 
 
-movieapp = Movie(1)
-movieapp.boxoffice()
-movieapp.movie()
-movieapp.movie_naver()
-movieapp.image()
+# movieapp = Movie(2)
+# movieapp.boxoffice()
+# movieapp.movie()
+# movieapp.movie_naver()
+# movieapp.image()
