@@ -83,7 +83,7 @@ class Movie:
         return
 
 
-# movieapp = Movie(2)
+# movieapp = Movie(1)
 # movieapp.boxoffice()
 # movieapp.movie()
 # movieapp.movie_naver()
