@@ -1,0 +1,112 @@
+ul {
+    /* bulletpoints none */
+    list-style-type: none;
+    padding: 0;
+}
+
+/* navigation bar style */
+.collapse.navbar-collapse {
+    justify-content : flex-end;
+}
+
+.navbar-brand {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1.2px;
+}
+
+.nav-item {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1.8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.bg-faded {
+    background-color: #fff;
+    color: inherit;
+}
+/* navigation bar end */
+
+
+/* header style */
+.header-title {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 60px;
+    line-height: 1.15;
+}
+
+/* (star)*= give properties to all <ul>'s with "-type-" */
+div[class*="background"] {
+    background-color: #A9A9A9;
+    background-size: cover;
+    background-position: center center;
+}
+/* header end */
+
+
+/* movie style */
+#movie {
+    padding: 30px 0;
+    background-color: #f7f7f7;
+}
+
+/* ~= give properties to all <div>'s with "card" */ 
+div[class~="card"] {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.movie-subtitle {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.movie-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -1.2px;
+}
+
+.movie-title-bar {
+    line-height: 0.2;
+    font-weight: 1200;
+    font-size: 40px;
+    color: 	#F4A460;
+}
+
+.card-footer-text {
+    font-size: 14px;
+    line-height: 0.6;
+}
+/* movie end */
+
+
+/* footer style */
+#footer {
+    padding: 80px 80px;
+    background-color: #181818;
+    font-family: 'Noto Serif KR', serif;
+    color: #fff;
+}
+
+.footer-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: -1.2px;
+}
+
+.footer-link {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: -1.2px;
+    text-align: right;
+}
+/* footer end */
