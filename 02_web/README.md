@@ -1,5 +1,7 @@
 # Project 02_Web
 
+* 프로젝트 파일 경로는 다음과 같다.
+
 ```
 02_web/
         README.md
@@ -12,4 +14,36 @@
         assets/
                 *.jpg
 ```
+
+
+
+## 프로젝트 설명
+
+
+
+
+
+![](C:\Users\student\projects\02_web\temp\index.png)
+
+
+
+![](C:\Users\student\projects\02_web\temp\navbar.png)
+
+
+
+
+
+![](C:\Users\student\projects\02_web\temp\footer.png)
+
+
+
+
+
+![](C:\Users\student\projects\02_web\temp\carousel.png)
+
+
+
+
+
+
 
