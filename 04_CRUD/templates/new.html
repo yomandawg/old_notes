@@ -1,0 +1,127 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>영화 등록 · Movies</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        }
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+        }
+        .container {
+            max-width: 960px;
+        }
+        .lh-condensed { 
+            line-height: 1.25; 
+        }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container">
+  <div class="py-4 text-center">
+    <h2>영화 등록하기</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-8 offset-md-2 order-md-1">
+      <hr class="mb-4">
+      <h4 class="mb-3">영화 정보</h4>
+      <form action="/movies/create/" method="post" class="needs-validation">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="title">영화명</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="title_en">영화명(영문)</label>
+            <input type="text" class="form-control" id="title_en" name="title_en" required>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="audience">누적 관객수</label>
+              <input type="number" class="form-control" id="audience" name="audience" placeholder="123456789" required>
+            </div>
+            <div class="col-md-6 mb-3 form-group">
+              <label for="open_date">개봉일</label>
+              <input class="form-control" type="date" value="2019-02-08" id="open_date" name="open_date" required>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="genre">장르</label>
+            <select class="custom-select d-block w-100" id="genre" name="genre" required>
+              <option value="">선택</option>
+              <option>가족</option>
+              <option>공포</option>
+              <option>교육</option>
+              <option>다큐멘터리</option>
+              <option>드라마</option>
+              <option>로맨스</option>
+              <option>코미디</option>
+              <option>모험</option>
+              <option>뮤지컬</option>
+              <option>미스터리</option>
+              <option>범죄</option>
+              <option>애니메이션</option>
+              <option>액션</option>
+              <option>에로</option>
+              <option>재난</option>
+              <option>전쟁</option>
+              <option>판타지</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="watch_grade">관람등급</label>
+            <select class="custom-select d-block w-100" id="watch_grade" name="watch_grade" required>
+              <option value="">선택</option>
+              <option>전체 관람가</option>
+              <option>12세 관람가</option>
+              <option>15세 관람가</option>
+              <option>청소년 관람불가</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="score">평점</label>
+            <select class="custom-select d-block w-100" id="score" name="score" required>
+              <option value="">선택</option>
+              {% for n in range(21)|reverse %}
+              <option>{{ n/2 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="poster_url">포스터 이미지 URL</label>
+            <input type="text" class="form-control" id="poster_url" name="poster_url" required>
+        </div>
+        <div class="form-group">
+            <label for="description">영화소개</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">등록</button>
+      </form>
+    </div>
+  </div>
+
+    <footer class="my-3 pt-3 text-muted text-center text-small">
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="/movies/">돌아가기</a></li>
+        </ul>
+        <p class="pt-5 mb-3">&copy; 2019 YJK</p>
+    </footer>
+</div>
+</body>
+</html>
