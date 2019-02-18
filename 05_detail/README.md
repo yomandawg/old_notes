@@ -198,3 +198,26 @@ def not_found(request, not_found):
 * input tag 사용
 * 992px 화면 기준 제목/이메일 칸 이중 row화
 
+
+### mypage.html
+
+* `mypage/` 경로 페이지
+* 사용자의 개인정보와 작성 글을 보여줄 페이지
+* 화면 좌측에 사용자의 정보, 우측에 사용자가 작성한 글 목록\
+	* `Bootstrap card`로 구현
+* 이미지는 장고 프로젝트 내부의 `static/` 경로에 미리 저장된 파일 사용
+
+
+### signup.html
+
+* `signup/` 경로 페이지
+* `bootstrap form` 사용
+* Email, 이름, 비밀번호, 비밀번호 확인을 위한 input tag 사용
+* Bootstrap Grid System을 사용하여 우측엔 이미지, 좌측엔 데이터 입력 폼
+
+
+### <str:not_found>/
+
+* 위에서 만든 경로를 제외한 다른 요청이 들어오면 보여줄 404 페이지
+* `variable routing`을 활용하여 사용자가 잘못 입력한 경로를 오류라고 표시
+* 주소와 함께 없는 경로라고 디스플레이
