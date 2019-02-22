@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%block body %}
+<h1>{{ movie.id }}번 영화 수정</h1>
+<form action="{% url 'update' movie.id %}" method="POST">
+    제목: <input type="text" value="{{ movie.title }}" name="title"/><br>
+    관객수: <input type="text" value="{{ movie.audience }}" name="audience"/><br>
+    장르: <input type="text" value="{{ movie.genre }}" name="genre"/><br>
+    평점: <input type="number" value="{{ movie.score }}" step="0.01" min="0" max="10" name="score"/><br>
+    poster_url: <input type="text" value="{{ movie.poster_url }}" name="poster_url"/><br>
+    description: <textarea rows="5" cols ="50" name="description">{{ movie.description }}</textarea><br>
+    <input type="submit" value="수정 완료"/>
+    {% csrf_token %}
+</form>
+<a href="{% url 'detail' movie.id %}">돌아가기</a>
+{% endblock %}

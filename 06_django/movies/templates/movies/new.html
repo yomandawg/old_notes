@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%block body %}
+<h1>영화 작성</h1>
+<form action="{% url 'create' %}" method="POST"> 
+    제목: <input type="text" name="title"/><br>
+    관객수: <input type="number" name="audience"/><br>
+    장르: <input type="text" name="genre"/><br>
+    평점: <input type="number" placeholder="선택" step="0.01" min="0" max="10" name="score"/><br>
+    poster_url: <input type="text" name="poster_url"/><br>
+    description: <textarea rows="5" cols ="50" name="description"></textarea><br>
+    <input type="submit" value="Submit"/>
+    {% csrf_token %}
+</form>
+<a href="/movies">돌아가기</a>
+{% endblock %}
