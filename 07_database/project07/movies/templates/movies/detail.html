@@ -1,0 +1,38 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}- {{ movie.title }}{% endblock %}
+
+{% block body %}
+    <div class="row mt-3">
+    <div class="col-12 col-md-6">
+        <div class="card mb-2">
+            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" width="960" class="card-img-top">
+            <div class="card-body">
+                <p class="card-text">
+                    {{ movie.title }}
+                    <hr>
+                    {{ movie.genre }}
+                    <hr>
+                    관람객 {{ movie.audience }}명
+                    <hr>
+                    {{ movie.description }}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% include 'movies/_score.html' %}
+</div>
+{% endblock %}
+
+{% block button %}
+    <a href="{% url 'movies:movie_list' %}">
+        <button>Movie list</button>
+    </a>
+    <a href="{% url 'movies:movie_update' movie.id %}">
+        <button type="submit">Edit</button>
+    </a>
+    <form action="{% url 'movies:movie_delete' movie.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('삭제?')">Delete</button>
+    </form>
+{% endblock %}

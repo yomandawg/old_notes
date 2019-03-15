@@ -1,0 +1,24 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}- list{% endblock %}
+
+{% block body %}
+    <h1>Movie list</h1>
+    {% if movies %}
+        <ul>
+            {% for movie in movies %}
+                <li>
+                    <a href="{% url 'movies:movie_read' movie.id %}">
+                       {{ movie.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block button %}
+    <a href="{% url 'movies:movie_create' %}">
+        <button>New movie</button>
+    </a>
+{% endblock %}
