@@ -1,7 +1,7 @@
 __pycache__/
 
-07_database/project07/.idea/
+.idea/
 
-07_database/project07/venv/
+venv/
 
-07_database/project07/__pycache__/
+__pycache__/
