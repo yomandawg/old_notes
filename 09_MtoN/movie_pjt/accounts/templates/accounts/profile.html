@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>{{ profile.username }}</h2>
+
+{% if not user.is_anonymous and user != profile %}
+<div>
+  {% if user in profile.followers.all %}
+  <a class="btn btn-outline-primary" href="{% url 'accounts:follow' profile.id %}">Following</a>
+  {% else %}
+  <a class="btn btn-primary" href="{% url 'accounts:follow' profile.id %}">Follow</a>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if user != profile %}
+<div>
+  <strong>followers</strong>
+  <ul>
+    {% for person in profile.followers.all %}
+    <li>{{ person.username }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+<div>
+  <strong>followings 추천 영화</strong>
+  <ul>
+    {% for recommend in recommends %}
+    <li>{{ recommend.0 }} - {{ recommend.1 }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% endblock %}

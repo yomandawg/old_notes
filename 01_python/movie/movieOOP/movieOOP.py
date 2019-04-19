@@ -6,12 +6,9 @@ import time
 from datetime import date, timedelta
 
 class Movie:
-    # KEY_KOBIS = os.getenv("KEY_KOBIS")
-    # KEY_NAVER = os.getenv("KEY_NAVER")
-    # PW_NAVER = os.getenv("PW_NAVER") 
-    KEY_KOBIS = "08305de6d4fe4be99dd4e3293b30dfa2"
-    KEY_NAVER = "xL3zdvWuqpSs08aJTPbk"
-    PW_NAVER = "CBUZR1B2cH"
+    KEY_KOBIS = os.getenv("KEY_KOBIS")
+    KEY_NAVER = os.getenv("KEY_NAVER")
+    PW_NAVER = os.getenv("PW_NAVER") 
     def __init__(self, weeks=1, path='.'):
         self.weeks=weeks
         self.path=path

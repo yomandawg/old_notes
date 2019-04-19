@@ -5,13 +5,9 @@ import os
 import time
 from datetime import date, timedelta
 
-# KEY_KOBIS = os.getenv("KEY_KOBIS")
-# KEY_NAVER = os.getenv("KEY_NAVER")
-# PW_NAVER = os.getenv("PW_NAVER")
-KEY_KOBIS = "08305de6d4fe4be99dd4e3293b30dfa2"
-KEY_NAVER = "xL3zdvWuqpSs08aJTPbk"
-PW_NAVER = "CBUZR1B2cH"
-
+KEY_KOBIS = os.getenv("KEY_KOBIS")
+KEY_NAVER = os.getenv("KEY_NAVER")
+PW_NAVER = os.getenv("PW_NAVER")
 
 def boxoffice(weeks=1, weekGb=0, key=KEY_KOBIS):
     base_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key={}&targetDt={}&weeekGb={}'

@@ -6,7 +6,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    c = sqlite3.connect('blog.db')
+    db = c.cursor()
+    sql = "SELECT * FROM articles"
+    db.execute(sql)
+    data = db.fetchall()
+    c.close()
+    return render_template('index.html', data=data)
     
 @app.route('/articles')
 def articles():

@@ -1,5 +1,5 @@
 # Project 04_CRUD
-> Create, Read, Update, Delete<br>
+> Create, Read, Update, Delete
 > Object Relational Mapping
 
 

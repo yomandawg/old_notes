@@ -4,38 +4,43 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>nngg - a workspace for you and me</title>
+    <title>Movies</title>
     <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="https://getbootstrap.com/docs/4.2/examples/sign-in/signin.css" rel="stylesheet">
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+    <link href="https://getbootstrap.com/docs/4.2/examples/album/album.css" rel="stylesheet">
   </head>
-
-  <body class="text-center">
-    <form class="form-signin">
-        <img class="mb-4" src={{ logo }} alt="null" width="180" height="180">
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+  <body>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">박스 오피스</h1>
+          <p class="lead text-muted">오늘 뭐보지?</p>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
-    </form>
+      </section>
+      <div class="album py-4 bg-light">
+        <div class="container">
+          <div class="row">
+            {% for row in movie_info %}
+            <!-- movie_naver.writerow(['movie_name', 'movie_code', 'thumb_url', 'link_url', 'user_rating']) -->
+            <div class="col-md-2">
+              <div class="card mb-4 shadow-sm">
+                <img src="{{ row[2] }}" class="card-img-top" alt="thumbnail">
+                <div class="card-body">
+                    <p class="card-text">
+                        {{ row[0] }}
+                    </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-primary" href="{{ row[3] }}" role="button">View</a>
+                    </div>
+                    <small class="text-muted"><p class="text-danger">{{ row[4] }}점</p></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
-
 </html>
