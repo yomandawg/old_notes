@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="main">
+        <h1>Movie App</h1>
+        <!-- List -->
+        <div class="movie-entry-box" v-if="!isDetailPage">
+            <button type="button" @click="getMovies">전체</button>
+            <button type="button" v-for="genre in genres" @click="setGenre(genre.id)">{{ genre.name }}</button>
+            <div class="movie-entry" v-for="movie in movies">
+                <p @click="setCurrentMovie(movie)">{{ movie.title }}</p>
+                <img v-bind:src="movie.poster_url" v-bind:alt="movie.title" @click="setCurrentMovie(movie)"/>
+            </div>
+        </div>
+        <!-- Detail -->
+        <div class="movie-detail" v-if="isDetailPage">
+            <button type="button" @click="togglePage">Back</button>
+            <h4>{{ currentMovie.title }}</h4>
+            <img v-bind:src="currentMovie.poster_url" v-bind:alt="currentMovie.title"/>
+            <p>{{ averageScore }}</p>
+            <p>{{ currentMovie.description }}</p>
+
+            <div v-for="movieReview in movieReviews">
+                <p>{{ movieReview.content }}</p>
+                <p>Score: {{ movieReview.score }}</p>
+                <hr/>
+            </div>
+
+            <textarea v-model="review.content"></textarea>
+            <input type="number" min="1" max="5" v-model="review.score"/>
+            <button type="button" @click="postReview(currentMovie.id)">Review</button>
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#main',
+            data: {
+                API_URL: 'https://project10-sitback.c9users.io/api/v1/',
+                movies: [],
+                isDetailPage: false, // flag
+                currentMovie: {},
+                review: {
+                    content: '',
+                    score: 1,
+                },
+                movieReviews: [],
+                genres: [],
+            },
+            computed: {
+                averageScore: function() {
+                    const scores = this.movieReviews.map(review => review.score)
+                    let sum = 0
+                    scores.forEach(score => {
+                        sum += score
+                    })
+                    return sum / scores.length
+                }
+            },
+            methods: {
+                togglePage: function() {
+                    this.isDetailPage = !this.isDetailPage
+                },
+                getMovies: function() {
+                    return axios.get(this.API_URL + 'movies/')
+                        .then(response => {
+                            this.movies = response.data
+                            return this.movies
+                        })
+                },
+                setCurrentMovie: function(movie) {
+                    console.log(movie)
+                    this.currentMovie = movie
+                    this.togglePage()
+                    this.getMovieReviews(movie.id)
+                },
+                postReview: function(movieId) {
+                    axios.post(`${this.API_URL}movies/${movieId}/scores/`, this.review)
+                        .then(response => {
+                            alert(response.data.message)
+                            this.review.content = ''
+                            this.review.score = 1
+                        })
+                },
+                getMovieReviews: function(movieId) {
+                    axios.get(`${this.API_URL}movies/${movieId}/scores/`)
+                        .then(response => {
+                            this.movieReviews = response.data
+                        })
+                },
+                getGenres: function() {
+                    axios.get(`${this.API_URL}genres/`)
+                        .then(response => {
+                            this.genres = response.data
+                        })
+                },
+                setGenre: function(genreId) {
+                    this.getMovies()
+                        .then(movies => {
+                            this.movies = movies.filter(movie => movie.genres.id === genreId)
+                        })
+                }
+            },
+            created: function() {
+                this.getMovies()
+                this.getGenres()
+            }
+        })
+    </script>
+</body>
+</html>
